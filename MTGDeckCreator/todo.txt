@@ -1,0 +1,7 @@
+﻿To do:
+- dodać klase do przetwarzania danych pobranych z SQL'a (nie wiem czy zrobić to oddzielnie czy zawrzeć w SQLDataExchange, ale chyba oddzielnie)
+- dodać dokumentację (nie wiem gdzie jest szablon, Google Drive grupy?) i zacząć ją powoli wypełniać
+
+Info:
+używam VS2015 Professional, jeżeli masz innego to mogę zainstalować każdą wersje bezproblemowo
+

@@ -17,7 +17,22 @@ namespace MTGDeckCreator
             InitializeComponent();
         }
 
-        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        private void opcjeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void infoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("MTGDeckCreator \n Autorzy: \tJakub Rup \n \tEwa Szklanny \n","Informacje");
+        }
+
+        private void otwórzToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void zapiszToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
         }

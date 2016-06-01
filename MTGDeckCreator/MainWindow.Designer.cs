@@ -45,7 +45,9 @@
             this.zapiszToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.opcjeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.infoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.buttonPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -53,9 +55,8 @@
             this.splitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cardLibraryView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.deckView)).BeginInit();
-            this.CardViewPanel.SuspendLayout();
             this.mainMenu.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonPanel
@@ -142,15 +143,14 @@
             // 
             // CardViewPanel
             // 
-            this.CardViewPanel.Controls.Add(this.deckStats);
             this.CardViewPanel.Location = new System.Drawing.Point(874, 27);
             this.CardViewPanel.Name = "CardViewPanel";
-            this.CardViewPanel.Size = new System.Drawing.Size(236, 546);
+            this.CardViewPanel.Size = new System.Drawing.Size(236, 372);
             this.CardViewPanel.TabIndex = 1;
             // 
             // deckStats
             // 
-            this.deckStats.Location = new System.Drawing.Point(8, 378);
+            this.deckStats.Location = new System.Drawing.Point(880, 405);
             this.deckStats.Name = "deckStats";
             this.deckStats.Size = new System.Drawing.Size(218, 162);
             this.deckStats.TabIndex = 0;
@@ -181,14 +181,14 @@
             // otwórzToolStripMenuItem
             // 
             this.otwórzToolStripMenuItem.Name = "otwórzToolStripMenuItem";
-            this.otwórzToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.otwórzToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
             this.otwórzToolStripMenuItem.Text = "Otwórz";
             this.otwórzToolStripMenuItem.Click += new System.EventHandler(this.otwórzToolStripMenuItem_Click);
             // 
             // zapiszToolStripMenuItem
             // 
             this.zapiszToolStripMenuItem.Name = "zapiszToolStripMenuItem";
-            this.zapiszToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.zapiszToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
             this.zapiszToolStripMenuItem.Text = "Zapisz";
             this.zapiszToolStripMenuItem.Click += new System.EventHandler(this.zapiszToolStripMenuItem_Click);
             // 
@@ -206,15 +206,20 @@
             this.infoToolStripMenuItem.Text = "Info";
             this.infoToolStripMenuItem.Click += new System.EventHandler(this.infoToolStripMenuItem_Click);
             // 
-            // errorProvider1
+            // errorProvider
             // 
-            this.errorProvider1.ContainerControl = this;
+            this.errorProvider.ContainerControl = this;
+            // 
+            // openFileDialog
+            // 
+            this.openFileDialog.FileName = "openFileDialog";
             // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1110, 606);
+            this.Controls.Add(this.deckStats);
             this.Controls.Add(this.CardViewPanel);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.buttonPanel);
@@ -229,10 +234,9 @@
             this.splitContainer1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.cardLibraryView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.deckView)).EndInit();
-            this.CardViewPanel.ResumeLayout(false);
             this.mainMenu.ResumeLayout(false);
             this.mainMenu.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -256,7 +260,9 @@
         private System.Windows.Forms.Button add4Button;
         private System.Windows.Forms.Button deleteButton;
         private System.Windows.Forms.Button addButton;
-        private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.ErrorProvider errorProvider;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog;
+        private System.Windows.Forms.OpenFileDialog openFileDialog;
     }
 }
 

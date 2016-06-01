@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace MTGDeckCreator
 {
@@ -15,7 +16,10 @@ namespace MTGDeckCreator
         public MainWindow()
         {
             InitializeComponent();
+            canvas = CardViewPanel.CreateGraphics();
         }
+
+        private Graphics canvas;
 
         private void opcjeToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -29,12 +33,23 @@ namespace MTGDeckCreator
 
         private void otwórzToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            DialogResult result = openFileDialog.ShowDialog();
 
+            string ofname = openFileDialog.FileName;
+            if (result == DialogResult.OK)
+            {
+            }
         }
 
         private void zapiszToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            DialogResult result = saveFileDialog.ShowDialog();
 
+            string sfname = saveFileDialog.FileName;
+            if (result == DialogResult.OK)
+            {
+                MessageBox.Show("File saved.");
+            }
         }
     }
 }

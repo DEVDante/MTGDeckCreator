@@ -8,7 +8,7 @@ namespace MTGDeckCreator
 {
     class Deck
     {
-        public List<Card> Deck { get; set; }
+        public List<Card> CardsList { get; set; }
 
         public int CreatureCards 
         {
@@ -17,14 +17,14 @@ namespace MTGDeckCreator
 
         public int CardsCount
         {
-            get { return Deck.Count; }
+            get { return CardsList.Count; }
         }
 
         public List<int> calculateManaCurve()
         {
             List<int> list = new List<int>();
 
-            foreach (Card card in Deck)
+            foreach (Card card in CardsList)
                 list[card.calculateCMC()] +=1;
 
             return list;
@@ -33,7 +33,7 @@ namespace MTGDeckCreator
         private int calculateOthersCount()
         {
             int i =0;
-            foreach (Card card in Deck)
+            foreach (Card card in CardsList)
             {
                 if (card.Types.Contains("Instant") || card.Types.Contains("Sorcery"))
                     i++;
@@ -44,7 +44,7 @@ namespace MTGDeckCreator
         public int calculateCreatureCount()
         {
             int i = 0;
-            foreach (Card card in Deck)
+            foreach (Card card in CardsList)
             {
                 if (card.Types.Contains("Creature") )
                     i++;
@@ -55,7 +55,7 @@ namespace MTGDeckCreator
         public int calculateLandCount()
         {
             int i = 0;
-            foreach (Card card in Deck)
+            foreach (Card card in CardsList)
             {
                 if (card.Types.Contains("Land") )
                     i++;

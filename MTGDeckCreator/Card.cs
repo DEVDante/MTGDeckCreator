@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace MTGDeckCreator
 {
-    abstract class Card
+    class Card
     {
         public string Name { get; set; }
         public string Set { get; set; }
@@ -15,7 +15,7 @@ namespace MTGDeckCreator
         public string[] Types { get; set; }
         public string[] SubTypes { get; set; }
         public string Rarity { get; set; }
-        public string Text { get; set; }
+        public string RulesText { get; set; }
         public string Flavor { get; set; }
         public string Artist { get; set; }
         public int Number { get; set; }

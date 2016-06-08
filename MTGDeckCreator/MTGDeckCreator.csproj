@@ -58,7 +58,6 @@
     <Compile Include="PlaneswalkerCard.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SpellCard.cs" />
     <Compile Include="SQLDataExchange.cs" />
     <EmbeddedResource Include="MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>

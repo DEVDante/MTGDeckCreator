@@ -63,6 +63,5 @@ namespace MTGDeckCreator
             return i;
         }
 
-
     }
 }

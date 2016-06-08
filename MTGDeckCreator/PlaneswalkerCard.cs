@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MTGDeckCreator
 {
-    class PlaneswalkerCard
+    class PlaneswalkerCard : Card
     {
         public int Loyalty { get; set; }
     }

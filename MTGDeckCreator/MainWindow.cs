@@ -16,29 +16,49 @@ namespace MTGDeckCreator
         public MainWindow()
         {
             InitializeComponent();
-            canvas = CardViewPanel.CreateGraphics();
+            cardViewPanel = CardViewPanel.CreateGraphics();
             deckTable = createTable();
             cardsTable = createTable();
             cardLibraryView.DataSource = cardsTable;
             deckView.DataSource = deckTable;
+
+            for (int i = 1; i<20; i++)
+            {
+                cardsTable.Rows.Add(i.ToString(), "Zestaw"+i, "Typ"+i);
+            }
         }
 
-        private Graphics canvas;
+        #region Properties
+        //private string CurrentCardImageLocation {
+        //    get
+        //    {
+        //        return currentCardImageLocation;
+        //    }
+        //    set
+        //    {
+        //        if (File.Exists(value))
+        //            currentCardImageLocation = value;
+        //    }
+        //}
+        #endregion
+
+        private Graphics cardViewPanel;
         private DataTable deckTable = new DataTable();
         private DataTable cardsTable = new DataTable();
-        string[] columnsNames = { "Name", "Set", "SuperTypes", "Types", "SubTypes", "Rarity" };//,"RulesText","Flavor","Artist","Numer","MultiverseID","ManaCost"};
+        private string currentCardImageLocation = "";
+        string[] columnsNames = { "Name", "Set", "SuperTypes", "Types", "SubTypes", "Rarity" }; //,"RulesText","Flavor","Artist","Numer","MultiverseID","ManaCost"};
         
 
         private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            
         }
 
         private void loadRow()
-        {   
-                       
+        {
+            
         }
-
+        
         private void infoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show("MTGDeckCreator \n Autorzy: \tJakub Rup \n \tEwa Szklanny \n","Informacje");
@@ -78,9 +98,30 @@ namespace MTGDeckCreator
         private void addButton_Click(object sender, EventArgs e)
         {
             if (cardLibraryView.SelectedRows.Count > 0)
-                foreach (var row in cardLibraryView.SelectedRows)
-                    deckTable.Rows.Add(row);
+             InterfaceOperations.addRow(((DataRowView)cardLibraryView.SelectedRows[0].DataBoundItem).Row, ref deckTable);
+
+            deckTable.NewRow();
         }
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            base.OnPaint(e);
+            if(currentCardImageLocation != "")
+                InterfaceOperations.drawImage(cardViewPanel, currentCardImageLocation, CardViewPanel.Size.Width, CardViewPanel.Size.Height);
+        }
+
+        //private IEnumerator<string> returnCell( DataGridViewRow r)
+        //{
+        //    for (int i = 0; i < r.Cells.Count; i++)
+        //        yield return r.Cells[i].Value.ToString();
+        //    yield break;
+        //}
+
+        //private bool checkIfContains(string number)
+        //{
+        //    deckTable.Rows.Contains(number);
+        //    return false;
+        //}
 
         private void deleteButton_Click(object sender, EventArgs e)
         {
@@ -96,7 +137,7 @@ namespace MTGDeckCreator
 
         private void delete4Button_Click(object sender, EventArgs e)
         {
-
+           
         }
 
         private void columnsSet(object sender, EventArgs e)
@@ -104,5 +145,11 @@ namespace MTGDeckCreator
 
         }
 
+        private void deckView_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+                string imagename = deckView.Rows[e.RowIndex].Cells[0].Value.ToString() + ".jpg";
+                currentCardImageLocation = @"C:\Users\Admin\Desktop\Projekt\MTGDeckCreator\MTGDeckCreator\" + imagename;
+                InterfaceOperations.drawImage(cardViewPanel, currentCardImageLocation,CardViewPanel.Size.Width, CardViewPanel.Size.Height);
+        }
     }
 }

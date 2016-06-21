@@ -5,8 +5,7 @@
 Info:
 używam VS2015 Professional, jeżeli masz innego to mogę zainstalować każdą wersje bezproblemowo
 
-Ja mam express 2013 for desktop, tak pisze :P
-I tak będę zmieniać..., ale u mnie wszystko trwa wieki, takze jak oferujesz się dostosować, to byłoby super ;) 
-
 Dodałam plik progamu StarUML, do tworzenia schematu klas. Nie wiem, czy jest dobry, ale działa ;P
 Nie wiele tam jest... bo nic nie wiem :/
+
+Czekam na metode ładującą obrazek do pliku, bo na razie jak nie ma obrazka to się sypie ;p

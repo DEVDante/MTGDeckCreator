@@ -37,6 +37,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             this.buttonPanel = new System.Windows.Forms.Panel();
             this.delete4Button = new System.Windows.Forms.Button();
             this.add4Button = new System.Windows.Forms.Button();
@@ -160,6 +161,7 @@
             // 
             // cardLibraryView
             // 
+            this.cardLibraryView.AllowUserToAddRows = false;
             this.cardLibraryView.AllowUserToDeleteRows = false;
             this.cardLibraryView.AllowUserToOrderColumns = true;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
@@ -202,6 +204,7 @@
             this.cardLibraryView.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.cardLibraryView.Size = new System.Drawing.Size(381, 512);
             this.cardLibraryView.TabIndex = 0;
+            this.cardLibraryView.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cardLibraryView_KeyPress);
             // 
             // deckView
             // 
@@ -241,13 +244,17 @@
             this.deckView.Name = "deckView";
             this.deckView.ReadOnly = true;
             dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle8.Font = new System.Drawing.Font("Georgia", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.InactiveCaptionText;
             dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.deckView.RowHeadersDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.InactiveCaption;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.Black;
+            this.deckView.RowsDefaultCellStyle = dataGridViewCellStyle9;
             this.deckView.Size = new System.Drawing.Size(382, 512);
             this.deckView.TabIndex = 0;
             this.deckView.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.deckView_RowEnter);

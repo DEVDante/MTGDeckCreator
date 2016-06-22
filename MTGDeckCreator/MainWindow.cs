@@ -16,47 +16,43 @@ namespace MTGDeckCreator
         public MainWindow()
         {
             InitializeComponent();
-            cardViewPanel = CardViewPanel.CreateGraphics();
-            deckTable = createTable();
-            cardsTable = createTable();
+            deckTable = InterfaceOperations.createTable(columnNames);
+            cardsTable = InterfaceOperations.createTable(columnNames);
             cardLibraryView.DataSource = cardsTable;
             deckView.DataSource = deckTable;
-
-            for (int i = 1; i<20; i++)
+            cardViewPanel = CardViewPanel.CreateGraphics();
+            
+            for (int i = 1; i<3; i++)
             {
                 cardsTable.Rows.Add(i.ToString(), "Zestaw"+i, "Typ"+i);
             }
         }
 
-        #region Properties
-        //private string CurrentCardImageLocation {
-        //    get
-        //    {
-        //        return currentCardImageLocation;
-        //    }
-        //    set
-        //    {
-        //        if (File.Exists(value))
-        //            currentCardImageLocation = value;
-        //    }
-        //}
-        #endregion
-
         private Graphics cardViewPanel;
+        private Options optionsPanel;
         private DataTable deckTable = new DataTable();
         private DataTable cardsTable = new DataTable();
         private string currentCardImageLocation = "";
-        string[] columnsNames = { "Name", "Set", "SuperTypes", "Types", "SubTypes", "Rarity" }; //,"RulesText","Flavor","Artist","Numer","MultiverseID","ManaCost"};
+        string[] columnNames = { "Name", "Set", "SuperTypes", "Types", "SubTypes", "Rarity" }; //,"RulesText","Flavor","Artist","Numer","MultiverseID","ManaCost"};
         
+
+        private void modifyColumns(string[] s)
+        {
+            columnNames = s;
+            loadTables();
+        }
+
+        private void loadTables()
+        {
+            //wyświetlanie tylko tych kolumn z datasource, których nazwy znajdują się w columnNames
+        }
+
 
         private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
-        }
-
-        private void loadRow()
-        {
-            
+            optionsPanel = new Options(this);
+            optionsPanel.update += modifyColumns;
+            optionsPanel.Show();
         }
         
         private void infoToolStripMenuItem_Click(object sender, EventArgs e)
@@ -87,22 +83,11 @@ namespace MTGDeckCreator
             }
         }
 
-        private DataTable createTable()
-        {
-            DataTable table = new DataTable();
-            table.Locale = System.Globalization.CultureInfo.InvariantCulture;
-            foreach (var name in columnsNames)
-                table.Columns.Add(name);
-
-            return table;
-        }
-
         private void addButton_Click(object sender, EventArgs e)
         {
             if (cardLibraryView.SelectedRows.Count > 0)
-             InterfaceOperations.addRow(((DataRowView)cardLibraryView.SelectedRows[0].DataBoundItem).Row, ref deckTable);
-
-            deckTable.NewRow();
+            foreach(DataGridViewRow row in cardLibraryView.SelectedRows)
+             InterfaceOperations.addRow(((DataRowView)cardLibraryView.SelectedRows[row.Index].DataBoundItem).Row, ref deckTable);
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -142,7 +127,7 @@ namespace MTGDeckCreator
            
         }
 
-        private void columnsSet(object sender, EventArgs e)
+        private void ssSet(object sender, EventArgs e)
         {
 
         }
@@ -152,6 +137,12 @@ namespace MTGDeckCreator
                 string imagename = deckView.Rows[e.RowIndex].Cells[0].Value.ToString() + ".jpg";
                 currentCardImageLocation = @"C:\Users\Admin\Desktop\Projekt\MTGDeckCreator\MTGDeckCreator\" + imagename;
                 InterfaceOperations.drawImage(cardViewPanel, currentCardImageLocation,CardViewPanel.Size.Width, CardViewPanel.Size.Height);
+        }
+
+        private void cardLibraryView_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == '\n' && cardLibraryView.SelectedRows.Count > 0)
+                addButton_Click(sender, e);
         }
     }
 }

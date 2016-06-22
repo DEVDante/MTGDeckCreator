@@ -12,12 +12,24 @@ namespace MTGDeckCreator
     //Klasa odpowiadająca za funkcjonalność interfejsu
     static class InterfaceOperations
     {
-        private static DataTable destinationTable;
-        private static DataTable sourceTable;
+        public static DataTable createTable(string[] columnsNames)
+        {
+            DataTable table = new DataTable();
+            table.Locale = System.Globalization.CultureInfo.InvariantCulture;
+            foreach (var name in columnsNames)
+                table.Columns.Add(name);
+
+            return table;
+        }
 
         public static void addRow(DataRow row, ref DataTable destinationTable)
         {
             destinationTable.ImportRow(row);
+        }
+
+        private static void loadRow()
+        {
+
         }
 
         public static void drawImage(Graphics canva, string path, int w, int h )

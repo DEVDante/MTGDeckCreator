@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace MTGDeckCreator
 {
-    class Card
+    class SpellCard
     {
         public string Name { get; set; }
         public string Set { get; set; }
@@ -20,7 +20,7 @@ namespace MTGDeckCreator
         public string Artist { get; set; }
         public int Number { get; set; }
         public int MultiverseID { get; set; }
-        public Image Picture { get; set; }
+        public string Picture { get; set; }
         public char[] ManaCost { get; set; }
 
 
@@ -37,6 +37,23 @@ namespace MTGDeckCreator
             }
 
             return result;
+        }
+
+        public SpellCard(string name, string set, string[] supertypes, string[] types, string[] subtypes, string rarity, string rules, string flavor, string artist, int num, int mid, string picture, char[] mana)
+        {
+            Name = name;
+            Set = set;
+            SuperTypes = supertypes;
+            Types = types;
+            SubTypes = subtypes;
+            Rarity = rarity;
+            RulesText = rules;
+            Flavor = flavor;
+            Artist = artist;
+            Number = num;
+            MultiverseID = mid;
+            Picture = picture;
+            ManaCost = mana;
         }
     }
 }

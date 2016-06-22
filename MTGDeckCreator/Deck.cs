@@ -8,7 +8,7 @@ namespace MTGDeckCreator
 {
     class Deck
     {
-        public List<Card> CardsList { get; set; }
+        public List<SpellCard> CardsList { get; set; }
 
         public int CreatureCards 
         {
@@ -24,7 +24,7 @@ namespace MTGDeckCreator
         {
             List<int> list = new List<int>();
 
-            foreach (Card card in CardsList)
+            foreach (SpellCard card in CardsList)
                 list[card.calculateCMC()] +=1;
 
             return list;
@@ -33,9 +33,9 @@ namespace MTGDeckCreator
         private int calculateOthersCount()
         {
             int i =0;
-            foreach (Card card in CardsList)
+            foreach (SpellCard card in CardsList)
             {
-                if (card.Types.Contains("Instant") || card.Types.Contains("Sorcery"))
+                if (!card.Types.Contains("Creature") && !card.Types.Contains("Land"))
                     i++;
             }
             return i;
@@ -44,7 +44,7 @@ namespace MTGDeckCreator
         public int calculateCreatureCount()
         {
             int i = 0;
-            foreach (Card card in CardsList)
+            foreach (SpellCard card in CardsList)
             {
                 if (card.Types.Contains("Creature") )
                     i++;
@@ -55,7 +55,7 @@ namespace MTGDeckCreator
         public int calculateLandCount()
         {
             int i = 0;
-            foreach (Card card in CardsList)
+            foreach (SpellCard card in CardsList)
             {
                 if (card.Types.Contains("Land") )
                     i++;

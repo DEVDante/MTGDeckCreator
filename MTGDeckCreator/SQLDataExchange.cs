@@ -126,7 +126,7 @@ namespace MTGDeckCreator
 
             if (this.OpenConnection())
             {
-                MySqlCommand cmd = new MySqlCommand("SELECT * FROM spellCards;", connection);
+                MySqlCommand cmd = new MySqlCommand("SELECT * FROM planeswalkerCards;", connection);
                 MySqlDataReader dataReader = cmd.ExecuteReader();
 
                 while (dataReader.Read())
@@ -158,6 +158,71 @@ namespace MTGDeckCreator
             cards.AddRange(spells);
 
             return cards;
+        }
+
+        public SpellCard GetCardInfo(string name)
+        {
+            List<SpellCard> list = new List<SpellCard>();
+            SpellCard card = null;
+
+            if (this.OpenConnection())
+            {
+                MySqlCommand cmd = new MySqlCommand("SELECT * FROM spellCards WHERE name = \"" + name + "\";", connection);
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+
+                while (dataReader.Read())
+                {
+                    string temp = Regex.Replace(dataReader["manaCost"].ToString(), @"\{(?<symbol>.)\}", "${symbol}");
+
+                    card = new SpellCard(dataReader["name"].ToString(), dataReader["setID"].ToString(), dataReader["superTypes"].ToString().Split('|'), dataReader["types"].ToString().Split('|'), dataReader["subTypes"].ToString().Split('|'), dataReader["rarity"].ToString(), dataReader["rulesText"].ToString(), dataReader["flavorText"].ToString(), dataReader["artist"].ToString(), Int32.Parse(dataReader["setNumber"].ToString()), Int32.Parse(dataReader["multiverseid"].ToString()), dataReader["picture"].ToString(), temp.ToCharArray());
+
+                    list.Add(card);
+                }
+
+                dataReader.Close();
+                this.CloseConnection();
+            }
+
+            if (this.OpenConnection())
+            {
+                MySqlCommand cmd = new MySqlCommand("SELECT * FROM planeswalkerCards WHERE name = \"" + name + "\";", connection);
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+
+                while (dataReader.Read())
+                {
+                    string temp = Regex.Replace(dataReader["manaCost"].ToString(), @"\{(?<symbol>.)\}", "${symbol}");
+
+                    card = new PlaneswalkerCard(dataReader["name"].ToString(), dataReader["setID"].ToString(), dataReader["superTypes"].ToString().Split('|'), dataReader["types"].ToString().Split('|'), dataReader["subTypes"].ToString().Split('|'), dataReader["rarity"].ToString(), dataReader["rulesText"].ToString(), dataReader["flavorText"].ToString(), dataReader["artist"].ToString(), Int32.Parse(dataReader["setNumber"].ToString()), Int32.Parse(dataReader["multiverseid"].ToString()), dataReader["picture"].ToString(), temp.ToCharArray(), Int32.Parse(dataReader["loyalty"].ToString()));
+
+                    list.Add(card);
+                }
+
+                dataReader.Close();
+                this.CloseConnection();
+            }
+
+            if (this.OpenConnection())
+            {
+                MySqlCommand cmd = new MySqlCommand("SELECT * FROM creatureCards WHERE name = \"" + name + "\";", connection);
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+
+                while (dataReader.Read())
+                {
+                    string temp = Regex.Replace(dataReader["manaCost"].ToString(), @"\{(?<symbol>.)\}", "${symbol}");
+
+                    card = new CreatureCard(dataReader["name"].ToString(), dataReader["setID"].ToString(), dataReader["superTypes"].ToString().Split('|'), dataReader["types"].ToString().Split('|'), dataReader["subTypes"].ToString().Split('|'), dataReader["rarity"].ToString(), dataReader["rulesText"].ToString(), dataReader["flavorText"].ToString(), dataReader["artist"].ToString(), Int32.Parse(dataReader["setNumber"].ToString()), Int32.Parse(dataReader["multiverseid"].ToString()), dataReader["picture"].ToString(), temp.ToCharArray(), Int32.Parse(dataReader["power"].ToString()), Int32.Parse(dataReader["toughness"].ToString()));
+
+                    list.Add(card);
+                }
+
+                dataReader.Close();
+                this.CloseConnection();
+            }
+
+            if (list.Count > 0)
+                return list[0];
+
+            return null;
         }
     }
 }

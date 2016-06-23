@@ -33,7 +33,8 @@ namespace MTGDeckCreator
                 if (Char.IsDigit(item))
                     result += Convert.ToByte(item);
                 else
-                    result += 1;
+                    if(item !='X' || item != 'x')
+                        result += 1;
             }
 
             return result;

@@ -57,8 +57,8 @@ namespace MTGDeckCreator
         
         private void infoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //SQLDataExchange sql = new SQLDataExchange("localhost", "root", "toor", "mtg"); --testy podpięte do Info be jestem leniwy
-            //List<SpellCard> list = sql.GetCardsList();
+            //SQLDataExchange sql = new SQLDataExchange("localhost", "root", "toor", "mtg");
+            //SpellCard list = sql.GetCardInfo("Beton");
             MessageBox.Show("MTGDeckCreator \n Autorzy: \tJakub Rup \n \tEwa Szklanny \n","Informacje");
         }
 

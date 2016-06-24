@@ -8,11 +8,11 @@ namespace MTGDeckCreator
 {
     class Deck
     {
-        public List<Tuple<int, SpellCard>> CardsList { get; set; }
+        public List<Pair<int, SpellCard>> CardsList { get; set; }
 
-        public int CreatureCards 
+        public int CreatureCards
         {
-            get { return calculateCreatureCount();} 
+            get { return calculateCreatureCount(); }
         }
 
         public int CardsCount
@@ -24,18 +24,18 @@ namespace MTGDeckCreator
         {
             List<int> list = new List<int>();
 
-            foreach (Tuple<int, SpellCard> card in CardsList)
-                list[card.Item2.calculateCMC()] +=1;
+            foreach (Pair<int, SpellCard> card in CardsList)
+                list[card.Second.calculateCMC()] += 1;
 
             return list;
         }
 
         private int calculateOthersCount()
         {
-            int i =0;
-            foreach (Tuple<int, SpellCard> card in CardsList)
+            int i = 0;
+            foreach (Pair<int, SpellCard> card in CardsList)
             {
-                if (!card.Item2.Types.Contains("Creature") && !card.Item2.Types.Contains("Land"))
+                if (!card.Second.Types.Contains("Creature") && !card.Second.Types.Contains("Land"))
                     i++;
             }
             return i;
@@ -44,9 +44,9 @@ namespace MTGDeckCreator
         public int calculateCreatureCount()
         {
             int i = 0;
-            foreach (Tuple<int, SpellCard> card in CardsList)
+            foreach (Pair<int, SpellCard> card in CardsList)
             {
-                if (card.Item2.Types.Contains("Creature") )
+                if (card.Second.Types.Contains("Creature"))
                     i++;
             }
             return i;
@@ -55,13 +55,29 @@ namespace MTGDeckCreator
         public int calculateLandCount()
         {
             int i = 0;
-            foreach (Tuple<int, SpellCard> card in CardsList)
+            foreach (Pair<int, SpellCard> card in CardsList)
             {
-                if (card.Item2.Types.Contains("Land") )
+                if (card.Second.Types.Contains("Land"))
                     i++;
             }
             return i;
         }
 
+    }
+
+    public class Pair<T, U>
+    {
+        public Pair()
+        {
+        }
+
+        public Pair(T first, U second)
+        {
+            this.First = first;
+            this.Second = second;
+        }
+
+        public T First { get; set; }
+        public U Second { get; set; }
     }
 }

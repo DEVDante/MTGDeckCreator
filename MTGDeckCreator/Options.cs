@@ -17,7 +17,8 @@ namespace MTGDeckCreator
             InitializeComponent();
         }
 
-        public event Action<string[]> update;
+        public event Action<string[]> columnsUpdate;
+        public event Action<bool> columnsModeChange;
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -29,9 +30,12 @@ namespace MTGDeckCreator
                 i++;
             }
 
-            if (update != null) update(selectedItems);
+            if (columnsUpdate != null) columnsUpdate(selectedItems);
+            if (columnsModeChange != null) columnsModeChange(fillCheckBox.Checked);
 
-            this.Close();
+                this.Close();
+
+            
         }
     }
 }

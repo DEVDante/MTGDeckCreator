@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DeckFile.cs" />
+    <Compile Include="Pair.cs" />
     <Compile Include="SpellCard.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="CreatureCard.cs" />

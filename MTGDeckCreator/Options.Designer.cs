@@ -31,12 +31,14 @@
             this.checkedListBox = new System.Windows.Forms.CheckedListBox();
             this.label1 = new System.Windows.Forms.Label();
             this.Zapisz = new System.Windows.Forms.Button();
+            this.fillCheckBox = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // checkedListBox
             // 
             this.checkedListBox.FormattingEnabled = true;
             this.checkedListBox.Items.AddRange(new object[] {
+            "MultiverseID",
             "Name",
             "Set",
             "SuperTypes",
@@ -47,11 +49,10 @@
             "Flavor",
             "Artist",
             "Numer",
-            "MultiverseID",
             "ManaCost"});
-            this.checkedListBox.Location = new System.Drawing.Point(17, 43);
+            this.checkedListBox.Location = new System.Drawing.Point(30, 43);
             this.checkedListBox.Name = "checkedListBox";
-            this.checkedListBox.Size = new System.Drawing.Size(314, 184);
+            this.checkedListBox.Size = new System.Drawing.Size(301, 184);
             this.checkedListBox.TabIndex = 0;
             // 
             // label1
@@ -73,12 +74,23 @@
             this.Zapisz.UseVisualStyleBackColor = true;
             this.Zapisz.Click += new System.EventHandler(this.button1_Click);
             // 
+            // fillCheckBox
+            // 
+            this.fillCheckBox.AutoSize = true;
+            this.fillCheckBox.Location = new System.Drawing.Point(17, 244);
+            this.fillCheckBox.Name = "fillCheckBox";
+            this.fillCheckBox.Size = new System.Drawing.Size(127, 18);
+            this.fillCheckBox.TabIndex = 3;
+            this.fillCheckBox.Text = "Fill with columns";
+            this.fillCheckBox.UseVisualStyleBackColor = true;
+            // 
             // Options
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
-            this.ClientSize = new System.Drawing.Size(360, 281);
+            this.ClientSize = new System.Drawing.Size(373, 288);
+            this.Controls.Add(this.fillCheckBox);
             this.Controls.Add(this.Zapisz);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.checkedListBox);
@@ -96,5 +108,6 @@
         private System.Windows.Forms.CheckedListBox checkedListBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button Zapisz;
+        private System.Windows.Forms.CheckBox fillCheckBox;
     }
 }

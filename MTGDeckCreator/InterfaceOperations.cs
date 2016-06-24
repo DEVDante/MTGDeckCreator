@@ -22,10 +22,10 @@ namespace MTGDeckCreator
             return table;
         }
 
-        public static void addRow(DataRow row, ref DataTable destinationTable)
-        {
-            destinationTable.ImportRow(row);
-        }
+        //public static void addRow(DataRow row, ref DataTable destinationTable)
+        //{
+        //    destinationTable.ImportRow(row);
+        //}
 
         private static void loadRow()
         {
@@ -33,10 +33,7 @@ namespace MTGDeckCreator
         }
 
         public static void drawImage(Graphics canva, string path, int w, int h )
-        {
-            //if (File.Exists(path))
-                //    SQLDataExchange.GetImage();
-
+        { 
             Image i = Bitmap.FromFile(path);
             i = new Bitmap(i, new Size(w, h));
             canva.DrawImage(i, new Point(0, 0));

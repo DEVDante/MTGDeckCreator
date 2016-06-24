@@ -4,14 +4,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Windows.Forms;
 
 namespace MTGDeckCreator
 {
     class TXTDeckFile : DeckFile
     {
-        public override Deck load()
+
+        public TXTDeckFile(string name)
         {
-            Deck deck = new Deck();
+            Filename = name;
+        }
+
+        public override List<Pair<int, string>> load()
+        {
+            List<Pair<int, string>> deck = new List<Pair<int, string>>();
 
             if (File.Exists(Filename))
             {
@@ -25,15 +32,26 @@ namespace MTGDeckCreator
                     int amount = 0;
                     Int32.TryParse(line.Substring(0, line.IndexOf(' ')), out amount);
                     string cardName = line.Substring(line.IndexOf(' ') + 1);
+                    
+                    deck.Add(new Pair<int, string>(amount, cardName));
                 }
             }
 
             return deck;
         }
 
-        public override void save()
+        public override void save(ref Deck d)
         {
-            throw new NotImplementedException();
+            List<string> decklist = new List<string>();
+
+            if (File.Exists(Filename))
+                if (MessageBox.Show("Are you sure you want to overwrite?", "Overwrite deck file", MessageBoxButtons.YesNo) == DialogResult.No) return;
+
+
+            for (int i = 0; i < d.CardsCount; i++)
+                decklist.Add(d[i].First.ToString() + " " + d[i].Second.Name);
+
+            File.WriteAllLines(Filename, decklist);
         }
     }
 }

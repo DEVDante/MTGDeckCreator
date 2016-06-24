@@ -39,7 +39,7 @@ namespace MTGDeckCreator
             List<int> list = new List<int>();
             int maxCMC = 0;
 
-            foreach (Pair<int, SpellCard> card in CardsList)
+            foreach (Pair<int, SpellCard> card in cardsList)
                 if(card.Second.calculateCMC()>maxCMC)
                     maxCMC = card.Second.calculateCMC();
 
@@ -81,20 +81,4 @@ namespace MTGDeckCreator
             return i;
         }
     }
-
-    //public class Pair<T, U>
-    //{
-    //    public Pair()
-    //    {
-    //    }
-
-    //    public Pair(T first, U second)
-    //    {
-    //        this.First = first;
-    //        this.Second = second;
-    //    }
-
-    //    public T First { get; set; }
-    //    public U Second { get; set; }
-    //}
 }

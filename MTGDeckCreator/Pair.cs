@@ -6,15 +6,19 @@ using System.Threading.Tasks;
 
 namespace MTGDeckCreator
 {
-    class Pair<T1,T2>
+    public class Pair<T, U>
     {
-        public Pair(T1 first, T2 second)
+        public Pair()
         {
-            First = first;
-            Second = second;
         }
-            public T1 First { get; set; }
-            public T2 Second { get; set; }
-        
+
+        public Pair(T first, U second)
+        {
+            this.First = first;
+            this.Second = second;
+        }
+
+        public T First { get; set; }
+        public U Second { get; set; }
     }
 }

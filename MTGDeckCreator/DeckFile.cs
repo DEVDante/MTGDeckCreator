@@ -10,8 +10,8 @@ namespace MTGDeckCreator
     {
         public string Filename { get; set; }
 
-        abstract public Deck load();
+        abstract public List<Pair<int, string>> load();
 
-        abstract public void save();
+        abstract public void save( ref Deck d );
     }
 }

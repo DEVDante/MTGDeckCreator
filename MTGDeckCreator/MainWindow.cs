@@ -16,7 +16,7 @@ namespace MTGDeckCreator
         public MainWindow()
         {
             InitializeComponent();
-            sql = new SQLDataExchange("localhost", "root", "", "mtg");
+            sql = new SQLDataExchange("localhost", "root", "toor", "mtg");
             deck = new Deck();
             cards = sql.GetCardsList();
             deckTable = InterfaceOperations.createTable(columnNames);
@@ -93,8 +93,8 @@ namespace MTGDeckCreator
 
         private void infoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //SQLDataExchange sql = new SQLDataExchange("localhost", "root", "toor", "mtg");
-            //SpellCard list = sql.GetCardInfo("Beton");
+            SQLDataExchange sql = new SQLDataExchange("localhost", "root", "toor", "mtg");
+            List<SpellCard> list = sql.GetCardsList();
             MessageBox.Show("MTGDeckCreator \n Authors: \tJakub Rup \n \tEwa Szklanny \n", "Informations");
         }
 

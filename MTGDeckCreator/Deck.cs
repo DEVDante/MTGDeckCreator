@@ -38,6 +38,14 @@ namespace MTGDeckCreator
         {
             MessageBox.Show(cardsList[0].GetType().ToString());
             List<int> list = new List<int>();
+            int maxCMC = 0;
+
+            foreach (Pair<int, SpellCard> card in CardsList)
+                if(card.Second.calculateCMC()>maxCMC)
+                    maxCMC = card.Second.calculateCMC();
+
+            for (int i = 0; i < maxCMC + 1; i++)
+                list.Add(0);
 
             foreach (Pair<int, SpellCard> card in cardsList)
                 list[card.Second.calculateCMC()] +=1;

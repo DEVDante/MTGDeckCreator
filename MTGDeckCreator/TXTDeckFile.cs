@@ -19,7 +19,12 @@ namespace MTGDeckCreator
 
                 foreach (var line in lines)
                 {
+                    if (line == "Sideboard")
+                        break;
 
+                    int amount = 0;
+                    Int32.TryParse(line.Substring(0, line.IndexOf(' ')), out amount);
+                    string cardName = line.Substring(line.IndexOf(' ') + 1);
                 }
             }
 

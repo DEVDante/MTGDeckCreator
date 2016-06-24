@@ -38,6 +38,9 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.buttonPanel = new System.Windows.Forms.Panel();
             this.delete4Button = new System.Windows.Forms.Button();
             this.add4Button = new System.Windows.Forms.Button();
@@ -52,12 +55,10 @@
             this.creatureCardsLabel = new System.Windows.Forms.Label();
             this.landCardsLabel = new System.Windows.Forms.Label();
             this.cardsLabel = new System.Windows.Forms.Label();
-            this.manaLabel = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.mainMenu = new System.Windows.Forms.MenuStrip();
             this.plikToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.otwórzToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -71,6 +72,7 @@
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.manaChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.buttonPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -81,6 +83,7 @@
             this.deckStats.SuspendLayout();
             this.mainMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.manaChart)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonPanel
@@ -277,29 +280,28 @@
             this.CardViewPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
             this.CardViewPanel.Location = new System.Drawing.Point(793, 35);
             this.CardViewPanel.Name = "CardViewPanel";
-            this.CardViewPanel.Size = new System.Drawing.Size(223, 310);
+            this.CardViewPanel.Size = new System.Drawing.Size(223, 298);
             this.CardViewPanel.TabIndex = 1;
             // 
             // deckStats
             // 
             this.deckStats.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.deckStats.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.deckStats.Controls.Add(this.manaChart);
             this.deckStats.Controls.Add(this.otherCardsLabel);
             this.deckStats.Controls.Add(this.creatureCardsLabel);
             this.deckStats.Controls.Add(this.landCardsLabel);
             this.deckStats.Controls.Add(this.cardsLabel);
-            this.deckStats.Controls.Add(this.manaLabel);
             this.deckStats.Controls.Add(this.label5);
             this.deckStats.Controls.Add(this.label4);
             this.deckStats.Controls.Add(this.label3);
             this.deckStats.Controls.Add(this.label2);
-            this.deckStats.Controls.Add(this.label1);
             this.deckStats.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.deckStats.Font = new System.Drawing.Font("Georgia", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.deckStats.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.deckStats.Location = new System.Drawing.Point(793, 369);
+            this.deckStats.Location = new System.Drawing.Point(793, 351);
             this.deckStats.Name = "deckStats";
-            this.deckStats.Size = new System.Drawing.Size(223, 166);
+            this.deckStats.Size = new System.Drawing.Size(223, 188);
             this.deckStats.TabIndex = 0;
             this.deckStats.TabStop = false;
             this.deckStats.Text = "Statistics";
@@ -309,7 +311,7 @@
             this.otherCardsLabel.AutoSize = true;
             this.otherCardsLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.otherCardsLabel.Font = new System.Drawing.Font("Georgia", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.otherCardsLabel.Location = new System.Drawing.Point(157, 121);
+            this.otherCardsLabel.Location = new System.Drawing.Point(156, 168);
             this.otherCardsLabel.Margin = new System.Windows.Forms.Padding(3);
             this.otherCardsLabel.Name = "otherCardsLabel";
             this.otherCardsLabel.Size = new System.Drawing.Size(22, 18);
@@ -321,7 +323,7 @@
             this.creatureCardsLabel.AutoSize = true;
             this.creatureCardsLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.creatureCardsLabel.Font = new System.Drawing.Font("Georgia", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.creatureCardsLabel.Location = new System.Drawing.Point(157, 101);
+            this.creatureCardsLabel.Location = new System.Drawing.Point(156, 148);
             this.creatureCardsLabel.Margin = new System.Windows.Forms.Padding(3);
             this.creatureCardsLabel.Name = "creatureCardsLabel";
             this.creatureCardsLabel.Size = new System.Drawing.Size(22, 18);
@@ -333,7 +335,7 @@
             this.landCardsLabel.AutoSize = true;
             this.landCardsLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.landCardsLabel.Font = new System.Drawing.Font("Georgia", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.landCardsLabel.Location = new System.Drawing.Point(157, 81);
+            this.landCardsLabel.Location = new System.Drawing.Point(156, 128);
             this.landCardsLabel.Margin = new System.Windows.Forms.Padding(3);
             this.landCardsLabel.Name = "landCardsLabel";
             this.landCardsLabel.Size = new System.Drawing.Size(22, 18);
@@ -345,30 +347,18 @@
             this.cardsLabel.AutoSize = true;
             this.cardsLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.cardsLabel.Font = new System.Drawing.Font("Georgia", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.cardsLabel.Location = new System.Drawing.Point(99, 47);
+            this.cardsLabel.Location = new System.Drawing.Point(98, 102);
             this.cardsLabel.Margin = new System.Windows.Forms.Padding(3);
             this.cardsLabel.Name = "cardsLabel";
             this.cardsLabel.Size = new System.Drawing.Size(17, 18);
             this.cardsLabel.TabIndex = 11;
             this.cardsLabel.Text = "o";
             // 
-            // manaLabel
-            // 
-            this.manaLabel.AutoSize = true;
-            this.manaLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.manaLabel.Font = new System.Drawing.Font("Georgia", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.manaLabel.Location = new System.Drawing.Point(94, 29);
-            this.manaLabel.Margin = new System.Windows.Forms.Padding(3);
-            this.manaLabel.Name = "manaLabel";
-            this.manaLabel.Size = new System.Drawing.Size(22, 18);
-            this.manaLabel.TabIndex = 10;
-            this.manaLabel.Text = " 0";
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Georgia", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label5.Location = new System.Drawing.Point(46, 123);
+            this.label5.Location = new System.Drawing.Point(45, 170);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(54, 14);
             this.label5.TabIndex = 4;
@@ -378,7 +368,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Georgia", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label4.Location = new System.Drawing.Point(46, 103);
+            this.label4.Location = new System.Drawing.Point(45, 150);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(109, 14);
             this.label4.TabIndex = 3;
@@ -388,7 +378,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Georgia", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label3.Location = new System.Drawing.Point(46, 83);
+            this.label3.Location = new System.Drawing.Point(45, 130);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(86, 14);
             this.label3.TabIndex = 2;
@@ -398,21 +388,11 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Georgia", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label2.Location = new System.Drawing.Point(29, 51);
+            this.label2.Location = new System.Drawing.Point(28, 106);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(47, 14);
             this.label2.TabIndex = 1;
             this.label2.Text = "Cards: ";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Georgia", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label1.Location = new System.Drawing.Point(28, 31);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(43, 14);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Mana:";
             // 
             // mainMenu
             // 
@@ -491,6 +471,33 @@
             // 
             this.openFileDialog.FileName = "openFileDialog";
             // 
+            // manaChart
+            // 
+            this.manaChart.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.manaChart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            chartArea1.Name = "ChartArea1";
+            this.manaChart.ChartAreas.Add(chartArea1);
+            this.manaChart.Location = new System.Drawing.Point(0, 21);
+            this.manaChart.Name = "manaChart";
+            this.manaChart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.None;
+            this.manaChart.PaletteCustomColors = new System.Drawing.Color[] {
+        System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))))};
+            series1.ChartArea = "ChartArea1";
+            series1.Font = new System.Drawing.Font("Georgia", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            series1.IsVisibleInLegend = false;
+            series1.Name = "Series1";
+            this.manaChart.Series.Add(series1);
+            this.manaChart.Size = new System.Drawing.Size(211, 111);
+            this.manaChart.TabIndex = 15;
+            this.manaChart.TabStop = false;
+            this.manaChart.Text = "Mana";
+            title1.Font = new System.Drawing.Font("Georgia", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            title1.Name = "Title1";
+            title1.Text = "Mana";
+            this.manaChart.Titles.Add(title1);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -519,6 +526,7 @@
             this.mainMenu.ResumeLayout(false);
             this.mainMenu.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.manaChart)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -549,16 +557,15 @@
         private System.Windows.Forms.ToolStripMenuItem nazwaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem typToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem subtypToolStripMenuItem;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label manaLabel;
         private System.Windows.Forms.Label otherCardsLabel;
         private System.Windows.Forms.Label creatureCardsLabel;
         private System.Windows.Forms.Label landCardsLabel;
         private System.Windows.Forms.Label cardsLabel;
+        private System.Windows.Forms.DataVisualization.Charting.Chart manaChart;
     }
 }
 

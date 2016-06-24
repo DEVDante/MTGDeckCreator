@@ -26,8 +26,7 @@ namespace MTGDeckCreator
             cardViewPanel = CardViewPanel.CreateGraphics();
 
             foreach (SpellCard card in cards) addToDataTable(cardsTable, card);
-
-            //deck.addCard(cards[1]);
+            
         }
 
         private SQLDataExchange sql;
@@ -38,18 +37,35 @@ namespace MTGDeckCreator
         private DataTable deckTable = new DataTable();
         private DataTable cardsTable = new DataTable();
         private string currentCardImageLocation = "";
-        string[] columnNames = { "Name", "Set", "SuperTypes", "Types", "SubTypes", "Rarity" ,"RulesText","Flavor","Artist","Numer","MultiverseID","Picture","ManaCost"};
+        string[] columnNames = { "Name", "Set", "Types", "Rarity" ,"RulesText","Flavor","Artist","Numer","MultiverseID","Picture","ManaCost"};
 
         private void addToDataTable(DataTable data, SpellCard c)
         {
-            data.Rows.Add(new object[] { c.Name, c.Set, c.SuperTypes[0], c.Types[0], c.SubTypes[0], c.Rarity, c.RulesText, c.Flavor, c.Artist, c.Number, c.MultiverseID, c.Picture, c.ManaCost});
+            StringBuilder type = new StringBuilder();
+            type.Append(loopThroughTypes(c.SuperTypes));
+            type.Append(loopThroughTypes(c.Types));
+            if(c.SubTypes != null)
+            {
+                type.Append(" - ");
+                type.Append(loopThroughTypes(c.SubTypes));
+            }
+
+            data.Rows.Add(new object[] { c.Name, c.Set, type, c.Rarity, c.RulesText, c.Flavor, c.Artist, c.Number, c.MultiverseID, c.Picture, c.ManaCost});
+        }
+
+        private string loopThroughTypes (string[] types)
+        {
+            string tmp = "";
+            foreach (string s in types)
+                tmp += s + " ";
+
+            return tmp;
         }
 
         private void modifyColumns(string[] s)
         {
             columnNames = s;
             loadTables();
-            //deckView.Columns[0].data
         }
 
         private void columnsFillMode(bool b)
@@ -68,7 +84,11 @@ namespace MTGDeckCreator
 
         private void viewStats()
         {
-            manaLabel.Text = deck.calculateManaCurve().ToString();
+            List<int> mana = deck.calculateManaCurve();
+            
+            foreach (int i in mana)
+                manaChart.Series[0].Points.Add(mana[i]);
+
             cardsLabel.Text = deck.CardsCount.ToString();
             landCardsLabel.Text = deck.calculateLandCount().ToString();
             creatureCardsLabel.Text = deck.calculateCreatureCount().ToString();
@@ -145,7 +165,7 @@ namespace MTGDeckCreator
                     addToDataTable(deckTable, c);
                     deck.addCard(c);
                 }
-                //viewStats();
+                viewStats();
             }
         }
 

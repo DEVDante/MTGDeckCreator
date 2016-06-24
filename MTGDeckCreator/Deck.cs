@@ -35,7 +35,6 @@ namespace MTGDeckCreator
 
         public List<int> calculateManaCurve()
         {
-            MessageBox.Show(cardsList[0].GetType().ToString());
             List<int> list = new List<int>();
             int maxCMC = 0;
 

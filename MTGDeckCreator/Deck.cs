@@ -9,7 +9,6 @@ namespace MTGDeckCreator
 {
     class Deck
     {
-
         public Pair<int, SpellCard> this[int i]
         {
             get { return cardsList[i]; }
@@ -55,7 +54,7 @@ namespace MTGDeckCreator
 
         public int calculateOtherCount()
         {
-            int i =0;
+            int i = 0;
             foreach (Pair< int, SpellCard> card in cardsList)
                 if (!card.Second.Types.Contains("Creature") && !card.Second.Types.Contains("Land"))
                     i++;
@@ -81,7 +80,6 @@ namespace MTGDeckCreator
                     i++;
             return i;
         }
-
     }
 
     //public class Pair<T, U>

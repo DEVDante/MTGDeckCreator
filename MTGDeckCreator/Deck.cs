@@ -9,28 +9,39 @@ namespace MTGDeckCreator
 {
     class Deck
     {
+        public List<Pair<int, SpellCard>> CardsList { get; set; }
+
+        public Deck()
+        {
+            CardsList = new List<Pair<int, SpellCard>>();
+        }
+
         public Pair<int, SpellCard> this[int i]
         {
-            get { return cardsList[i]; }
+            get { return CardsList[i]; }
         }
 
         public void addCard(SpellCard card)
         {
-            foreach (Pair<int, SpellCard> pair in cardsList)
+            foreach (Pair<int, SpellCard> pair in CardsList)
              if (pair.Second == card)
                 {
                     pair.First++;
                     break;
                 }
                     
-            cardsList.Add(new Pair<int,SpellCard>(1,card));
+            CardsList.Add(new Pair<int,SpellCard>(1,card));
         }
         
-        private List<Pair<int, SpellCard>> cardsList = new List<Pair<int, SpellCard>>();
-
         public int CardsCount
         {
-            get { return cardsList.Count; }
+            get
+            {
+                int n = 0;
+                foreach (Pair<int, SpellCard> item in CardsList)
+                    n += item.First;
+                return n;
+            }
         }
 
         public List<int> calculateManaCurve()
@@ -38,14 +49,14 @@ namespace MTGDeckCreator
             List<int> list = new List<int>();
             int maxCMC = 0;
 
-            foreach (Pair<int, SpellCard> card in cardsList)
+            foreach (Pair<int, SpellCard> card in CardsList)
                 if(card.Second.calculateCMC()>maxCMC)
                     maxCMC = card.Second.calculateCMC();
 
             for (int i = 0; i < maxCMC + 1; i++)
                 list.Add(0);
 
-            foreach (Pair<int, SpellCard> card in cardsList)
+            foreach (Pair<int, SpellCard> card in CardsList)
                 list[card.Second.calculateCMC()] +=1;
 
             return list;
@@ -54,7 +65,7 @@ namespace MTGDeckCreator
         public int calculateOtherCount()
         {
             int i = 0;
-            foreach (Pair< int, SpellCard> card in cardsList)
+            foreach (Pair< int, SpellCard> card in CardsList)
                 if (!card.Second.Types.Contains("Creature") && !card.Second.Types.Contains("Land"))
                     i++;
             
@@ -64,7 +75,7 @@ namespace MTGDeckCreator
         public int calculateCreatureCount()
         {
             int i = 0;
-            foreach (Pair< int, SpellCard> card in cardsList)
+            foreach (Pair< int, SpellCard> card in CardsList)
                 if (card.Second.Types.Contains("Creature") )
                     i++;
             
@@ -74,7 +85,7 @@ namespace MTGDeckCreator
         public int calculateLandCount()
         {
             int i = 0;
-            foreach (Pair<int, SpellCard> card in cardsList)
+            foreach (Pair<int, SpellCard> card in CardsList)
                 if (card.Second.Types.Contains("Land") )
                     i++;
             return i;

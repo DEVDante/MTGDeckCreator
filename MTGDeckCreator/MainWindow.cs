@@ -113,8 +113,12 @@ namespace MTGDeckCreator
 
         private void infoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SQLDataExchange sql = new SQLDataExchange("localhost", "root", "toor", "mtg");
-            List<SpellCard> list = sql.GetCardsList();
+            //SQLDataExchange sql = new SQLDataExchange("localhost", "root", "toor", "mtg");
+            //List<SpellCard> list = sql.GetCardsList();
+
+            //DCKDeckFile f = new DCKDeckFile("test.dck");
+            //var l = f.load();
+
             MessageBox.Show("MTGDeckCreator \n Authors: \tJakub Rup \n \tEwa Szklanny \n", "Informations");
         }
 

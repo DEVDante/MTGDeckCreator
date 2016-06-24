@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DCKDeckFile.cs" />
     <Compile Include="DeckFile.cs" />
     <Compile Include="Pair.cs" />
     <Compile Include="SpellCard.cs" />

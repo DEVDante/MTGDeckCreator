@@ -21,12 +21,17 @@ namespace MTGDeckCreator
             sql = new SQLDataExchange(loginData.Server, loginData.Login, loginData.Password, "mtg");
             deck = new Deck();
             cards = sql.GetCardsList();
-            deckTable.Columns.Add("Number");
-            InterfaceOperations.addColumns(deckTable, columnNames);
-            InterfaceOperations.addColumns(cardsTable, columnNames);
+            deckTable.Columns.Add("Count");
+            InterfaceOperations.addColumns(deckTable, new string[]{ "Name", "Set", "Types", "Rarity", "RulesText", "Flavor", "Artist","Numer","MultiverseID","Picture","ManaCost"});
+            InterfaceOperations.addColumns(cardsTable, new string[]{ "Name", "Set", "Types", "Rarity", "RulesText", "Flavor", "Artist","Numer","MultiverseID","Picture","ManaCost"});
+            cardViewPanel = CardViewPanel.CreateGraphics();
+            //cardLibraryView.AutoGenerateColumns = false;
+            //deckView.AutoGenerateColumns = false;
+
             cardLibraryView.DataSource = cardsTable;
             deckView.DataSource = deckTable;
-            cardViewPanel = CardViewPanel.CreateGraphics();
+
+            loadTables();
 
             foreach (SpellCard card in cards) addToDataTable(cardsTable, card);
             
@@ -42,7 +47,7 @@ namespace MTGDeckCreator
         private DataTable cardsTable = new DataTable();
 
         private string currentCardImageLocation = "";
-        string[] columnNames = { "Name", "Set", "Types", "Rarity", "RulesText", "Flavor", "Artist","Numer","MultiverseID","Picture","ManaCost"};
+        string[] columnNames = { "Name", "Set", "Types", "Rarity" };//, "RulesText", "Flavor", "Artist","Numer","MultiverseID","Picture","ManaCost"};
 
         private void addToDataTable(DataTable data, SpellCard c, int? number = null)
         {
@@ -111,15 +116,22 @@ namespace MTGDeckCreator
 
         private void loadTables()
         {
-            //wyświetlanie tylko tych kolumn z datasource, których nazwy znajdują się w columnNames
-           // cardLibraryView.DataSource = cardsTable.Columns.
+            foreach ( DataGridViewColumn c in deckView.Columns)
+                c.Visible = false;
+
+            foreach (DataGridViewColumn c in cardLibraryView.Columns)
+                c.Visible = false;
+
+            foreach (string name in columnNames)
+            {
+                deckView.Columns[name].Visible = true;
+                cardLibraryView.Columns[name].Visible = true;
+            }
+
+            deckView.Columns["Name"].Visible = true;
+            deckView.Columns["Count"].Visible = true;
+            cardLibraryView.Columns["Name"].Visible = true;
         }
-
-        //SQLDataExchange sql = new SQLDataExchange("localhost", "root", "toor", "mtg");
-        //List<SpellCard> list = sql.GetCardsList();
-
-        //DCKDeckFile f = new DCKDeckFile("test.dck");
-        //var l = f.load();
 
         private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -177,12 +189,6 @@ namespace MTGDeckCreator
                 if (cell.OwningColumn.HeaderText == heder) return cell.Value.ToString();
             return "";
         }
-        
-        //private void setValueInCell(DataRow row, object value, string heder = "Number")
-        //{
-        //    foreach (DataGridViewCell cell in row)
-        //        if (cell.OwningColumn.HeaderText == heder) cell.Value = value;
-        //}
 
         protected override void OnPaint(PaintEventArgs e)
         {
@@ -214,7 +220,7 @@ namespace MTGDeckCreator
                 {
                     SpellCard c = sql.GetCardInfo(getValueFromCell(row));
                     deck.deleteCard(c);
-                    //deckTable.Rows.RemoveAt(row.Index);
+                    deckTable.Rows.RemoveAt(row.Index);
                 }
                 viewStats();
             }

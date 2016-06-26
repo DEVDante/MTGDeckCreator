@@ -39,7 +39,6 @@
             this.checkedListBox.FormattingEnabled = true;
             this.checkedListBox.Items.AddRange(new object[] {
             "MultiverseID",
-            "Name",
             "Set",
             "Types",
             "Rarity",
@@ -50,7 +49,7 @@
             "ManaCost"});
             this.checkedListBox.Location = new System.Drawing.Point(30, 43);
             this.checkedListBox.Name = "checkedListBox";
-            this.checkedListBox.Size = new System.Drawing.Size(301, 184);
+            this.checkedListBox.Size = new System.Drawing.Size(301, 139);
             this.checkedListBox.TabIndex = 0;
             // 
             // label1
@@ -64,7 +63,7 @@
             // 
             // Zapisz
             // 
-            this.Zapisz.Location = new System.Drawing.Point(244, 244);
+            this.Zapisz.Location = new System.Drawing.Point(244, 197);
             this.Zapisz.Name = "Zapisz";
             this.Zapisz.Size = new System.Drawing.Size(87, 25);
             this.Zapisz.TabIndex = 2;
@@ -75,7 +74,7 @@
             // fillCheckBox
             // 
             this.fillCheckBox.AutoSize = true;
-            this.fillCheckBox.Location = new System.Drawing.Point(17, 244);
+            this.fillCheckBox.Location = new System.Drawing.Point(17, 197);
             this.fillCheckBox.Name = "fillCheckBox";
             this.fillCheckBox.Size = new System.Drawing.Size(127, 18);
             this.fillCheckBox.TabIndex = 3;
@@ -87,7 +86,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
-            this.ClientSize = new System.Drawing.Size(373, 288);
+            this.ClientSize = new System.Drawing.Size(373, 244);
             this.Controls.Add(this.fillCheckBox);
             this.Controls.Add(this.Zapisz);
             this.Controls.Add(this.label1);

@@ -23,14 +23,19 @@ namespace MTGDeckCreator
 
         public void addCard(SpellCard card)
         {
-            foreach (Pair<int, SpellCard> pair in CardsList)
+            if(!countUpgrade(card))
+                CardsList.Add(new Pair<int,SpellCard>(1,card));
+        }
+
+        private bool countUpgrade(SpellCard card)
+        {
+            foreach(Pair < int, SpellCard > pair in CardsList)
              if (pair.Second == card)
-                {
-                    pair.First++;
-                    break;
-                }
-                    
-            CardsList.Add(new Pair<int,SpellCard>(1,card));
+            {
+                pair.First++;
+                return true;
+            }
+            return false;
         }
 
         public void deleteCard(SpellCard card)
@@ -68,7 +73,6 @@ namespace MTGDeckCreator
 
             foreach (Pair<int, SpellCard> card in CardsList)
                 list[card.Second.calculateCMC()] +=1;
-
             return list;
         }
 
@@ -77,8 +81,7 @@ namespace MTGDeckCreator
             int i = 0;
             foreach (Pair< int, SpellCard> card in CardsList)
                 if (!card.Second.Types.Contains("Creature") && !card.Second.Types.Contains("Land"))
-                    i++;
-            
+                    i+=card.First;
             return i;
         }
 
@@ -87,8 +90,7 @@ namespace MTGDeckCreator
             int i = 0;
             foreach (Pair< int, SpellCard> card in CardsList)
                 if (card.Second.Types.Contains("Creature") )
-                    i++;
-            
+                    i+=card.First;
             return i;
         }
 
@@ -97,7 +99,7 @@ namespace MTGDeckCreator
             int i = 0;
             foreach (Pair<int, SpellCard> card in CardsList)
                 if (card.Second.Types.Contains("Land") )
-                    i++;
+                    i+=card.First;
             return i;
         }
     }

@@ -32,7 +32,17 @@ namespace MTGDeckCreator
                     
             CardsList.Add(new Pair<int,SpellCard>(1,card));
         }
-        
+
+        public void deleteCard(SpellCard card)
+        {
+            for (int i = 0; i < CardsList.Count; i++)
+                if (CardsList[i].Second == card)
+                    if(CardsList[i].First > 1)
+                        CardsList[i].First--;
+                    else
+                        CardsList.RemoveAt(i);
+        }
+
         public int CardsCount
         {
             get

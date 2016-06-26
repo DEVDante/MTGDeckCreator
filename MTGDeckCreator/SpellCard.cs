@@ -40,6 +40,22 @@ namespace MTGDeckCreator
             return result;
         }
 
+        public static bool operator ==(SpellCard c1, SpellCard c2)
+        {
+            if (c1.MultiverseID == c2.MultiverseID)
+                return true;
+            else
+                return false;
+        }
+
+        public static bool operator !=(SpellCard c1, SpellCard c2)
+        {
+            if (c1.MultiverseID != c2.MultiverseID)
+                return true;
+            else
+                return false;
+        }
+
         public SpellCard(string name, string set, string[] supertypes, string[] types, string[] subtypes, string rarity, string rules, string flavor, string artist, int num, int mid, string picture, char[] mana)
         {
             Name = name;

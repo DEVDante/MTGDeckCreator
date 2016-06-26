@@ -16,7 +16,9 @@ namespace MTGDeckCreator
         public MainWindow()
         {
             InitializeComponent();
-            sql = new SQLDataExchange("localhost", "root", "toor", "mtg");
+            loginData = new LoginWindow();
+            loginData.ShowDialog();
+            sql = new SQLDataExchange(loginData.Server, loginData.Login, loginData.Password, "mtg");
             deck = new Deck();
             cards = sql.GetCardsList();
             deckTable = InterfaceOperations.createTable(columnNames);
@@ -29,6 +31,7 @@ namespace MTGDeckCreator
             
         }
 
+        private LoginWindow loginData;
         private SQLDataExchange sql;
         private Deck deck;
         private List<SpellCard> cards;
@@ -211,6 +214,15 @@ namespace MTGDeckCreator
             if (e.KeyChar == '\n' && cardLibraryView.SelectedRows.Count > 0)
                 addButton_Click(sender, e);
         }
-        
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void loginToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.loginData.ShowDialog();
+        }
     }
 }

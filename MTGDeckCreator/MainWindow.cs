@@ -16,7 +16,9 @@ namespace MTGDeckCreator
         public MainWindow()
         {
             InitializeComponent();
-            sql = new SQLDataExchange("localhost", "root", "", "mtg");
+            loginData = new LoginWindow();
+            loginData.ShowDialog();
+            sql = new SQLDataExchange(loginData.Server, loginData.Login, loginData.Password, "mtg");
             deck = new Deck();
             cards = sql.GetCardsList();
             deckTable.Columns.Add("Number");
@@ -30,6 +32,7 @@ namespace MTGDeckCreator
             
         }
 
+        private LoginWindow loginData;
         private SQLDataExchange sql;
         private Deck deck;
         private List<SpellCard> cards;
@@ -47,7 +50,7 @@ namespace MTGDeckCreator
             type.Append(loopThroughTypes(c.SuperTypes));
             type.Append(loopThroughTypes(c.Types));
             string x = loopThroughTypes(c.SubTypes);
-            if ( x != null)
+            if ( x.Trim() != "")
             {
                 type.Append(" - ");
                 type.Append(loopThroughTypes(c.SubTypes));
@@ -242,6 +245,22 @@ namespace MTGDeckCreator
 
             if (File.Exists(currentCardImageLocation)) 
                 InterfaceOperations.drawImage(cardViewPanel, currentCardImageLocation, CardViewPanel.Size.Width, CardViewPanel.Size.Height);
+        }
+
+        //private void cardLibraryView_KeyPress(object sender, KeyPressEventArgs e)
+        //{
+        //    if (e.KeyChar == '\n' && cardLibraryView.SelectedRows.Count > 0)
+        //        addButton_Click(sender, e);
+        //}
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void loginToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.loginData.ShowDialog();
         }
     }
 }

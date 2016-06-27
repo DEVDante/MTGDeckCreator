@@ -31,7 +31,7 @@ namespace MTGDeckCreator
             setConnection();
         }
 
-        public void setConnection()
+        private void setConnection()
         {
             string connectionString;
             connectionString = "SERVER=" + Server + ";" + "DATABASE=" + Database + ";" + "UID=" + User + ";" + "PASSWORD=" + Password + ";";

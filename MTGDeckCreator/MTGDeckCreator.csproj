@@ -56,7 +56,6 @@
     </Compile>
     <Compile Include="Pair.cs" />
     <Compile Include="SpellCard.cs" />
-    <Compile Include="Config.cs" />
     <Compile Include="CreatureCard.cs" />
     <Compile Include="Deck.cs" />
     <Compile Include="InterfaceOperations.cs" />

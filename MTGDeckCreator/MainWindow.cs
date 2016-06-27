@@ -191,8 +191,7 @@ namespace MTGDeckCreator
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
-           // if (currentCardImageLocation != "")
-           //   InterfaceOperations.drawImage(cardViewPanel, currentCardImageLocation, CardViewPanel.Size.Width, CardViewPanel.Size.Height);
+            InterfaceOperations.drawImage(cardViewPanel, currentCardImageLocation, CardViewPanel.Size.Width, CardViewPanel.Size.Height);
         }
 
         private void addButton_Click(object sender, EventArgs e)
@@ -297,10 +296,14 @@ namespace MTGDeckCreator
         private void deckView_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
             string imagename = deckView.Rows[e.RowIndex].Cells["Picture"].Value.ToString();
-            currentCardImageLocation = @"C:\Users\Admin\Desktop\Projekt\MTGDeckCreator\MTGDeckCreator\" + imagename;
+            string filename = @"C:\Users\Admin\Desktop\Projekt\MTGDeckCreator\MTGDeckCreator\" + imagename;
+            
 
-            if (File.Exists(currentCardImageLocation)) 
+            if (File.Exists(filename))
+            {
+                currentCardImageLocation = filename;
                 InterfaceOperations.drawImage(cardViewPanel, currentCardImageLocation, CardViewPanel.Size.Width, CardViewPanel.Size.Height);
+            }
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)

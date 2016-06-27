@@ -55,6 +55,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label1.Location = new System.Drawing.Point(14, 16);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(102, 14);
@@ -74,12 +75,13 @@
             // fillCheckBox
             // 
             this.fillCheckBox.AutoSize = true;
+            this.fillCheckBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.fillCheckBox.Location = new System.Drawing.Point(17, 197);
             this.fillCheckBox.Name = "fillCheckBox";
             this.fillCheckBox.Size = new System.Drawing.Size(127, 18);
             this.fillCheckBox.TabIndex = 3;
             this.fillCheckBox.Text = "Fill with columns";
-            this.fillCheckBox.UseVisualStyleBackColor = true;
+            this.fillCheckBox.UseVisualStyleBackColor = false;
             // 
             // Options
             // 

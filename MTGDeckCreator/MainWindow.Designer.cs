@@ -281,9 +281,9 @@
             // 
             this.CardViewPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.CardViewPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
-            this.CardViewPanel.Location = new System.Drawing.Point(785, 27);
+            this.CardViewPanel.Location = new System.Drawing.Point(783, 27);
             this.CardViewPanel.Name = "CardViewPanel";
-            this.CardViewPanel.Size = new System.Drawing.Size(233, 288);
+            this.CardViewPanel.Size = new System.Drawing.Size(239, 317);
             this.CardViewPanel.TabIndex = 1;
             // 
             // deckStats
@@ -303,7 +303,7 @@
             this.deckStats.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.deckStats.Font = new System.Drawing.Font("Georgia", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.deckStats.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.deckStats.Location = new System.Drawing.Point(783, 321);
+            this.deckStats.Location = new System.Drawing.Point(785, 350);
             this.deckStats.Name = "deckStats";
             this.deckStats.Size = new System.Drawing.Size(237, 218);
             this.deckStats.TabIndex = 0;
@@ -474,31 +474,31 @@
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(100, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
             // 
             // otwórzToolStripMenuItem
             // 
             this.otwórzToolStripMenuItem.Name = "otwórzToolStripMenuItem";
-            this.otwórzToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.otwórzToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.otwórzToolStripMenuItem.Text = "Open";
             this.otwórzToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // zapiszToolStripMenuItem
             // 
             this.zapiszToolStripMenuItem.Name = "zapiszToolStripMenuItem";
-            this.zapiszToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.zapiszToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.zapiszToolStripMenuItem.Text = "Save";
             this.zapiszToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(100, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -542,12 +542,11 @@
             // 
             // saveFileDialog
             // 
-            this.saveFileDialog.Filter = "|.dck";
+            this.saveFileDialog.Filter = "*|.dck";
             // 
             // openFileDialog
             // 
-            this.openFileDialog.FileName = "openFileDialog";
-            this.openFileDialog.Filter = "|.dck";
+            this.openFileDialog.Filter = "*|.dck";
             // 
             // MainWindow
             // 

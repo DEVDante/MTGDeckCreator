@@ -22,11 +22,12 @@ namespace MTGDeckCreator
             deck = new Deck();
             cards = sql.GetCardsList();
             deckTable.Columns.Add("Count");
-            InterfaceOperations.addColumns(deckTable, new string[]{ "Name", "Set", "Types", "Rarity", "RulesText", "Flavor", "Artist","Numer","MultiverseID","Picture","ManaCost"});
-            InterfaceOperations.addColumns(cardsTable, new string[]{ "Name", "Set", "Types", "Rarity", "RulesText", "Flavor", "Artist","Numer","MultiverseID","Picture","ManaCost"});
+            InterfaceOperations.addColumns(deckTable, new string[]{ "Name", "Set", "Types", "Rarity", "RulesText", "Flavor", "Artist","Number","MultiverseID","Picture","ManaCost"});
+            InterfaceOperations.addColumns(cardsTable, new string[]{ "Name", "Set", "Types", "Rarity", "RulesText", "Flavor", "Artist","Number","MultiverseID","Picture","ManaCost"});
             cardViewPanel = CardViewPanel.CreateGraphics();
-            //cardLibraryView.AutoGenerateColumns = false;
-            //deckView.AutoGenerateColumns = false;
+            InterfaceOperations.drawImage(cardViewPanel, currentCardImageLocation, CardViewPanel.Size.Width, CardViewPanel.Size.Height);
+            //deckTable.PrimaryKey = new DataColumn[1] { deckTable.Columns["MultiverseID"] };
+            //cardsTable.PrimaryKey = new DataColumn[1] { cardsTable.Columns["MultiverseID"] };
 
             cardLibraryView.DataSource = cardsTable;
             deckView.DataSource = deckTable;
@@ -34,7 +35,6 @@ namespace MTGDeckCreator
             loadTables();
 
             foreach (SpellCard card in cards) addToDataTable(cardsTable, card);
-            
         }
 
         private LoginWindow loginData;
@@ -46,25 +46,28 @@ namespace MTGDeckCreator
         private DataTable deckTable = new DataTable();
         private DataTable cardsTable = new DataTable();
 
-        private string currentCardImageLocation = "";
-        string[] columnNames = { "Name", "Set", "Types", "Rarity" };//, "RulesText", "Flavor", "Artist","Numer","MultiverseID","Picture","ManaCost"};
+        private string currentCardImageLocation = @"C:\Users\Admin\Desktop\Projekt\MTGDeckCreator\MTGDeckCreator\cardBack.jpg";
+        string[] columnNames = { "Name", "Set", "Types", "Rarity" };
 
         private void addToDataTable(DataTable data, SpellCard c, int? number = null)
         {
             StringBuilder type = new StringBuilder();
-            type.Append(loopThroughTypes(c.SuperTypes));
-            type.Append(loopThroughTypes(c.Types));
-            string x = loopThroughTypes(c.SubTypes);
+            type.Append(loopThrough(c.SuperTypes));
+            type.Append(loopThrough(c.Types));
+            string x = loopThrough(c.SubTypes);
             if ( x.Trim() != "")
             {
                 type.Append(" - ");
-                type.Append(loopThroughTypes(c.SubTypes));
+                type.Append(loopThrough(c.SubTypes));
             }
+
+            string manaCost = "";
+            manaCost = loopThrough(c.ManaCost);
             
             if (number == null)
-                data.Rows.Add(new object[] { c.Name, c.Set, type, c.Rarity, c.RulesText, c.Flavor, c.Artist, c.Number, c.MultiverseID, c.Picture, c.ManaCost });
+                data.Rows.Add(new object[] { c.Name, c.Set, type, c.Rarity, c.RulesText, c.Flavor, c.Artist, c.Number, c.MultiverseID, c.Picture, manaCost });
             else
-                data.Rows.Add(new object[] { number, c.Name, c.Set, type, c.Rarity, c.RulesText, c.Flavor, c.Artist, c.Number, c.MultiverseID, c.Picture, c.ManaCost });
+                data.Rows.Add(new object[] { number, c.Name, c.Set, type, c.Rarity, c.RulesText, c.Flavor, c.Artist, c.Number, c.MultiverseID, c.Picture, manaCost });
         }
 
         private void addToDeckTable(List<Pair<int,string>> list)
@@ -73,10 +76,19 @@ namespace MTGDeckCreator
                 addToDataTable(deckTable, sql.GetCardInfo(pair.Second), pair.First);
         }
 
-        private string loopThroughTypes (string[] types)
+        private string loopThrough (string[] items)
         {
             string tmp = "";
-            foreach (string s in types)
+            foreach (string s in items)
+                tmp += s + " ";
+
+            return tmp;
+        }
+
+        private string loopThrough(char[] items)
+        {
+            string tmp = "";
+            foreach (char s in items)
                 tmp += s + " ";
 
             return tmp;
@@ -175,26 +187,11 @@ namespace MTGDeckCreator
             }
         }
 
-        private SpellCard findCardByID( int id )
-        {
-            foreach (SpellCard card in cards)
-                if ((int)card.MultiverseID == id) return card;
-
-            return null;
-        }
-
-        private string getValueFromCell(DataGridViewRow row, string heder = "Name")
-        {
-            foreach (DataGridViewCell cell in row.Cells)
-                if (cell.OwningColumn.HeaderText == heder) return cell.Value.ToString();
-            return "";
-        }
-
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
            // if (currentCardImageLocation != "")
-              //  InterfaceOperations.drawImage(cardViewPanel, currentCardImageLocation, CardViewPanel.Size.Width, CardViewPanel.Size.Height);
+           //   InterfaceOperations.drawImage(cardViewPanel, currentCardImageLocation, CardViewPanel.Size.Width, CardViewPanel.Size.Height);
         }
 
         private void addButton_Click(object sender, EventArgs e)
@@ -203,13 +200,32 @@ namespace MTGDeckCreator
             {
                 foreach (DataGridViewRow row in cardLibraryView.SelectedRows)
                 {
-                    SpellCard c = sql.GetCardInfo(getValueFromCell(row));
+                    SpellCard c = sql.GetCardInfo(row.Cells["Name"].Value.ToString());
+                    DataGridViewRow rowInDeck = findRowInDeckTableByName(row.Cells["Name"].Value.ToString());
 
-                    addToDataTable(deckTable, c, 1);
+                    if ( rowInDeck == null)
+                        addToDataTable(deckTable, c, 1);
+                    else
+                        upgradeCardNumber(rowInDeck);
+
                     deck.addCard(c);
                 }
                 viewStats();
             }
+        }
+
+        private void upgradeCardNumber(DataGridViewRow row)
+        {
+            string value = row.Cells["Count"].Value.ToString();
+            if (int.Parse(value) < 4)
+                row.Cells["Count"].Value = int.Parse(value) + 1;
+            else MessageBox.Show("Can't add another " + row.Cells["Name"].Value.ToString() + " card.");
+        }
+        private void downgradeCardNumber(DataGridViewRow row)
+        {
+            string value = row.Cells["Count"].Value.ToString();
+            if (int.Parse(value) > 1)
+                row.Cells["Count"].Value = int.Parse(value) - 1;
         }
 
         private void deleteButton_Click(object sender, EventArgs e)
@@ -218,12 +234,26 @@ namespace MTGDeckCreator
             {
                 foreach (DataGridViewRow row in deckView.SelectedRows)
                 {
-                    SpellCard c = sql.GetCardInfo(getValueFromCell(row));
+                    SpellCard c = sql.GetCardInfo(row.Cells["Name"].Value.ToString());
+
+                    if (int.Parse(row.Cells["Count"].Value.ToString()) != 1)
+                        downgradeCardNumber(row);
+                    else
+                        deckTable.Rows.RemoveAt(row.Index);
+
                     deck.deleteCard(c);
-                    deckTable.Rows.RemoveAt(row.Index);
                 }
                 viewStats();
             }
+        }
+
+        private DataGridViewRow findRowInDeckTableByName(string name)
+        {
+            foreach (DataGridViewRow row in deckView.Rows)
+                if (row.Cells["Name"].Value.ToString() == name)
+                    return row;
+
+            return null;
         }
 
         private void add4Button_Click(object sender, EventArgs e)
@@ -232,9 +262,16 @@ namespace MTGDeckCreator
             {
                 foreach (DataGridViewRow row in cardLibraryView.SelectedRows)
                 {
-                    SpellCard c = sql.GetCardInfo(getValueFromCell(row));
-                    addToDataTable(deckTable, c, 4);
-                    deck.addCard(c);
+                    SpellCard c = sql.GetCardInfo(row.Cells["Name"].Value.ToString());
+
+                    if (findRowInDeckTableByName(row.Cells["Name"].Value.ToString()) == null)
+                    {
+                        addToDataTable(deckTable, c, 4);
+
+                        for (int i = 0; i < 4; i++)
+                            deck.addCard(c);
+                    }
+                    else MessageBox.Show("Can't add 4 more " + c.Name + " cards.");                
                 }
                 viewStats();
             }
@@ -242,6 +279,18 @@ namespace MTGDeckCreator
 
         private void delete4Button_Click(object sender, EventArgs e)
         {
+            if (deckView.SelectedRows.Count > 0)
+            {
+                foreach (DataGridViewRow row in deckView.SelectedRows)
+                {
+                    SpellCard c = sql.GetCardInfo(row.Cells["Name"].Value.ToString());
+                    deckTable.Rows.RemoveAt(row.Index);
+
+                    for (int i = 0; i < 4; i++)
+                        deck.deleteCard(c);
+                }
+                viewStats();
+            }
         }
 
         private void deckView_RowEnter(object sender, DataGridViewCellEventArgs e)
@@ -252,12 +301,6 @@ namespace MTGDeckCreator
             if (File.Exists(currentCardImageLocation)) 
                 InterfaceOperations.drawImage(cardViewPanel, currentCardImageLocation, CardViewPanel.Size.Width, CardViewPanel.Size.Height);
         }
-
-        //private void cardLibraryView_KeyPress(object sender, KeyPressEventArgs e)
-        //{
-        //    if (e.KeyChar == '\n' && cardLibraryView.SelectedRows.Count > 0)
-        //        addButton_Click(sender, e);
-        //}
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {

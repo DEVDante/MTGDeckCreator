@@ -23,7 +23,10 @@ namespace MTGDeckCreator
         public int First
         {
             get { return first; }
-            set { if (value <= 4) first = value; }
+            set {
+                if (value <= 4)
+                    first = value;
+            }
         }
         public U Second { get; set; }
     }

@@ -42,7 +42,7 @@ namespace MTGDeckCreator
 
         public static bool operator ==(SpellCard c1, SpellCard c2)
         {
-            if (c1.MultiverseID == c2.MultiverseID)
+            if (c1.Name == c2.Name)
                 return true;
             else
                 return false;
@@ -50,7 +50,7 @@ namespace MTGDeckCreator
 
         public static bool operator !=(SpellCard c1, SpellCard c2)
         {
-            if (c1.MultiverseID != c2.MultiverseID)
+            if (c1.Name != c2.Name)
                 return true;
             else
                 return false;

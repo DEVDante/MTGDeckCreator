@@ -12,9 +12,21 @@ namespace MTGDeckCreator
 {
     public partial class Options : Form
     {
-        public Options( MainWindow w )
+        public Options(string[] checkedColumns, DataGridViewAutoSizeColumnsMode m)
         {
             InitializeComponent();
+            foreach (string name in checkedColumns)
+            for (int i = 0; i < checkedListBox.Items.Count; i++)
+            {
+                if ((string)checkedListBox.Items[i] == name )
+                {
+                    checkedListBox.SetItemChecked(i, true);
+                }
+            }
+
+            if (m == DataGridViewAutoSizeColumnsMode.Fill)
+                fillCheckBox.Checked = true;
+
         }
 
         public event Action<string[]> columnsUpdate;

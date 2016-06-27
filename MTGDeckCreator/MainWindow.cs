@@ -147,7 +147,8 @@ namespace MTGDeckCreator
 
         private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            optionsPanel = new Options(this);
+            DataGridViewAutoSizeColumnsMode m = cardLibraryView.AutoSizeColumnsMode;
+            optionsPanel = new Options(columnNames, m);
             optionsPanel.columnsUpdate += modifyColumns;
             optionsPanel.columnsModeChange += columnsFillMode;
             optionsPanel.Show();

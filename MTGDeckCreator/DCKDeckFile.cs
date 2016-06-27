@@ -48,9 +48,8 @@ namespace MTGDeckCreator
             if (File.Exists(Filename))
                 if (MessageBox.Show("Are you sure you want to overwrite?", "Overwrite deck file", MessageBoxButtons.YesNo) == DialogResult.No) return;
 
-
-            for (int i = 0; i < d.CardsCount; i++)
-                decklist.Add(d[i].First.ToString() + " [" + d[i].Second.Set + ":" + d[i].Second.Number + "] " + d[i].Second.Name);
+            foreach (Pair<int, SpellCard> card in d.CardsList)
+                decklist.Add(card.First.ToString() + " [" + card.Second.Set + ":" + card.Second.Number + "] " + card.Second.Name);
 
             File.WriteAllLines(Filename, decklist);
         }

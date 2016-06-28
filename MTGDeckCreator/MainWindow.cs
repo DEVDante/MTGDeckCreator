@@ -168,8 +168,17 @@ namespace MTGDeckCreator
             if (result == DialogResult.OK)
             {
                 List<Pair<int, string>> list = new List<Pair<int, string>>();
-                DCKDeckFile f = new DCKDeckFile(ofname);
-                list = f.load();
+                if(ofname.EndsWith(".txt"))
+                {
+                    TXTDeckFile f = new TXTDeckFile(ofname);
+                    list = f.load();
+                }
+                else
+                {
+                    DCKDeckFile f = new DCKDeckFile(ofname);
+                    list = f.load();
+                }
+
                 addToDeckTable(list);
 
                 foreach (Pair<int,string> x in list)
@@ -187,8 +196,17 @@ namespace MTGDeckCreator
             string sfname = saveFileDialog.FileName;
             if (result == DialogResult.OK)
             {
-                DCKDeckFile f = new DCKDeckFile(sfname);
-                f.save(ref deck);
+                if (sfname.EndsWith(".txt"))
+                {
+                    TXTDeckFile f = new TXTDeckFile(sfname);
+                    f.save(ref deck);
+                }
+                else
+                {
+                    DCKDeckFile f = new DCKDeckFile(sfname);
+                    f.save(ref deck);
+                }
+
                 MessageBox.Show("File saved.");
             }
         }

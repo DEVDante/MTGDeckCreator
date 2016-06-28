@@ -345,8 +345,8 @@
             series1.Font = new System.Drawing.Font("Georgia", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             series1.IsVisibleInLegend = false;
             series1.Name = "Series1";
-            series1.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int32;
-            series1.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int32;
+            series1.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.UInt32;
+            series1.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.UInt32;
             this.manaChart.Series.Add(series1);
             this.manaChart.Size = new System.Drawing.Size(229, 111);
             this.manaChart.TabIndex = 15;

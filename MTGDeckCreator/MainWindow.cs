@@ -117,8 +117,9 @@ namespace MTGDeckCreator
         private void viewStats()
         {
             manaChart.Series[0].Points.Clear();
-            foreach (int i in deck.calculateManaCurve())
-                manaChart.Series[0].Points.AddY(i);
+            List<int> table = deck.calculateManaCurve();
+            for (int i = 0; i < table.Count(); i++)
+                    manaChart.Series[0].Points.AddXY(i, table[i]);
 
             cardsLabel.Text = deck.CardsCount.ToString();
             landCardsLabel.Text = deck.calculateLandCount().ToString();
@@ -170,6 +171,10 @@ namespace MTGDeckCreator
                 DCKDeckFile f = new DCKDeckFile(ofname);
                 list = f.load();
                 addToDeckTable(list);
+
+                foreach (Pair<int,string> x in list)
+                    for(int i =0; i < x.First; i++)
+                        deck.addCard( sql.GetCardInfo(x.Second));
                 
                 viewStats();
             }
